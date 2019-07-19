@@ -1,0 +1,5 @@
+naali.filler
+objs/
+*.o
+*~
+#*#
