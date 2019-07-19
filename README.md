@@ -10,3 +10,4 @@
   - Pour la suite:
     - verif taille tableau
     - recup tableau
+    - Algo de resolution
