@@ -6,16 +6,12 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/07/17 16:29:27 by naali            ###   ########.fr        #
+#    Updated: 2019/07/19 10:26:21 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 rose		=	\033[1;31m
-violetfonce	=	\033[0;35m
-violetclair	=	\033[1;35m
 neutre		=	\033[0m
-cyanfonce	=	\033[0;36m
-cyanclair	=	\033[1;36m
 vertfonce	=	\033[0;32m
 
 NAME		=	naali.filler
@@ -24,47 +20,58 @@ CC			=	gcc
 
 CFLAG 		=	-Wall -Wextra -Werror
 
+INCLUDES	=	-I./includes	\
+				-I./libft
+
 OBJ_PATH	=	./objs
 
-SRC			=	main.c
+SRC			=	main.c			\
+				player.c		\
+				init_plateau.c
 
 OBJ 		=	$(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
 
-LIBS 		=	ft
+LIB_PATH	=	-L./libft
 
-LIB_PATH	=	./libft
+LIBS 		=	-lft
+
+LFLAG		=	$(LIB_PATH) $(LIBS)
 
 ######################################################################
 
 vpath %.c ./srcs/:
 
-all		:	$(NAME)
+all		:	libs $(NAME)
 
 $(NAME)	:	$(OBJ)
-			@echo "${vertfonce}Compiling $@ ...${neutre}\c"
-			@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG)
-			@echo "${vertclair}DONE${neutre}"
+			@echo "${vertfonce}Compiling ...${neutre}\c"
+			@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LFLAG) $(INCLUDES)
+			@echo "${rose}DONE${neutre}"
 
 $(OBJ_PATH)/%.o	:	%.c
 			@mkdir $(OBJ_PATH) 2> /dev/null || true
-			@echo "${violetfonce}Creating $@ ...${neutre}\c"
-			@$(CC) $(CFLAG) -o $@ -c $<
+			@echo "${vertfonce}Creating $@ ...\c${neutre}"
+			@$(CC) $(CFLAG) -o $@ -c $< $(INCLUDES)
 			@echo "${rose}DONE${neutre}"
 
 clean	:
-			@echo "${rouge}Cleaning the project ...${neutre}\c"
+			@echo "${rose}Cleaning the project ...${neutre}\c"
 			@make clean -C libft
 			@rm -rf $(OBJ_PATH)
-			@echo "${rose}DONE${neutre}"
+			@echo "${vertfonce}DONE${neutre}"
 
 fclean	:	clean
-			@echo "${rouge}Fcleaning the project ...${neutre}\c"
+			@echo "${rose}Fcleaning the project ...${neutre}\c"
 			@make fclean -C libft
 			@if [ -f "/tmp/doom_log2" ]; then \
 				rm /tmp/doom_log2; \
 			fi
 				@rm -rf $(NAME)
-			@echo "${rose}DONE${neutre}"
+			@echo "${vertfonce}DONE${neutre}"
+			@rm -f filler.trace
+
+libs	:
+			make -C ./libft/
 
 re	:	fclean all
 
