@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 02:48:46 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 05:35:28 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define	FILLER_H
 
 # include <includes.h>
+
+typedef struct		s_solve
+{
+	int			x;
+	int			y;
+}					t_solve;
 
 typedef struct		s_player
 {
@@ -52,5 +58,6 @@ int				get_piece(t_player *p);
 /* Resolution du Tableau */
 int				solve(t_player *p);
 void			print_answer(int y, int x);
+char			get_char_player(t_player *p);
 
 #endif

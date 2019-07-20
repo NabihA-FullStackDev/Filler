@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:46:14 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 02:33:02 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 05:35:46 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				get_space(t_player *p)
 	return (0);
 }
 
-static char		get_char_player(t_player *p)
+char			get_char_player(t_player *p)
 {
 	if (p->order == 1)
 		return ('O');

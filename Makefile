@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/07/20 02:05:37 by nabih            ###   ########.fr        #
+#    Updated: 2019/07/20 08:29:41 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -25,12 +25,13 @@ INCLUDES		=	-I./includes	\
 
 OBJ_PATH		=	./objs
 
-SRC				=	main.c			\
-					player.c		\
-					player_start.c	\
-					init_plateau.c	\
-					piece.c			\
-					solve.c			\
+SRC				=	main.c				\
+					player.c			\
+					player_start.c		\
+					init_plateau.c		\
+					piece.c				\
+					solve.c				\
+					solve_direction.c	\
 					print_answer.c
 
 OBJ 			=	$(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
