@@ -6,14 +6,13 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/19 10:28:39 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 02:25:29 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
 
-
-static int	get_tab_size(char **tab)
+int				get_tab_size(char **tab)
 {
 	int		i;
 
@@ -23,7 +22,7 @@ static int	get_tab_size(char **tab)
 	return (i);
 }
 
-int			get_board_size(t_player *p)
+int				get_board_size(t_player *p)
 {
 	int		size;
 
@@ -52,41 +51,22 @@ int			get_board_size(t_player *p)
 	return ((size == 3) ? 0 : -1);
 }
 
-int			count_column_space(char *str)
+int				get_board(t_player *p)
 {
-	int		i;
-
-	i = 0;
-	while (str != NULL && str[i] == ' ' && str[i])
-		i++;
-	return (i);
-}
-
-int			get_first_board(t_player *p)
-{
-	int		x;
 	int		y;
 
-	x = 0;
 	y = 0;
-	if (get_next_line(0, &(p->line)) == -1)
-	{
-		ft_putstr("Bad board\n");
+	if ((p->plateau = (char**)malloc(sizeof(char*) * (p->y_plat))) == NULL)
 		return (-1);
-	}
-	else
+	while (y < (p->y_plat + 1) && get_next_line(0, &(p->line)) != -1)
 	{
-		x = p->x_plat + count_column_space(p->line) + 1;
-		y = p->y_plat;
-		free_str(&(p->line));
-		if ((p->line = (char*)malloc(sizeof(char) * (x * y + 1))) == NULL)
+		if (((p->plateau)[y] = (char*)malloc(sizeof(char) \
+										* (ft_strlen(p->line) + 1))) == NULL)
 			return (-1);
-		if (read(0, p->line, (x * y)) == -1)
-			return (-1);
-		else
-			p->plateau = ft_strsplit(p->line, '\n');
+		ft_strcpy((p->plateau)[y], p->line);
 		free_str(&(p->line));
-		p->xy_plat = x * (y + 1);
+		y++;
 	}
+	free_str(&(p->line));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 07:52:02 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/19 09:14:23 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 01:44:05 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void			init_player_vars(t_player *p)
 	p->plateau = NULL;
 	p->x_plat = 0;
 	p->y_plat = 0;
+	p->xy_plat = 0;
 	p->piece = NULL;
 	p->x_piec = 0;
 	p->y_piec = 0;
+	p->xy_piec = 0;
+	p->x_start = 0;
+	p->y_start = 0;
 }
 
 void			free_str(char **ptr)
