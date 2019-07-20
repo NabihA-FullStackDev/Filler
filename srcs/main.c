@@ -6,24 +6,11 @@
 /*   By: naali <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:29:53 by naali             #+#    #+#             */
-/*   Updated: 2019/07/20 02:41:56 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 02:52:37 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
-
-void			print_tab(t_player *p)
-{
-	int			i;
-
-	i = 0;
-	while (i < p->y_plat)
-	{
-		ft_putstr_fd(p->plateau[i], 2);
-		ft_putchar_fd('\n', 2);
-		i++;
-	}
-}
 
 static int		get_everything(t_player *p)
 {
@@ -64,12 +51,12 @@ int				main(void)
 	if (get_order_num(&p) == -1)
 		return (-1);
 	stop = first_call(&p);
-	dprintf(2, "start: x = %d; y = %d\n", p.x_start - p.space, p.y_start - 1);
 	while (stop == 0 && get_everything(&p) == 0)
 	{
 		stop = solve(&p);
 		free_str_tab(&(p.plateau), p.y_plat + 1);
 		free_str_tab(&(p.piece), p.y_piec);
+		dprintf(2, "pointer:\n- line = %p\n- plateau = %p\n- piece = %p\n", p.line, p.plateau, p.piece);
 	}
 	return (0);
 }

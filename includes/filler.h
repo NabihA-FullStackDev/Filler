@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 02:30:15 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/20 02:48:46 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct		s_player
 	unsigned int	y_start;
 	unsigned int	x_start;
 }					t_player;
-
-void			print_tab(t_player *p);
 
 /* Structure Player */
 void			init_player_vars(t_player *p);
