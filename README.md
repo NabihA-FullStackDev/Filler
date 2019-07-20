@@ -1,13 +1,16 @@
 # Filler
 
-<b>Sujet</b>: <html>https://cdn.intra.42.fr/pdf/pdf/634/filler.fr.pdf</html>
+<b>Sujet</b>: => <a href="https://cdn.intra.42.fr/pdf/pdf/634/filler.fr.pdf"> Cliquez ici pour le voir </a>
+
+  - Pour la suite:
+    - Check de l'intégrité des infos reçu
 
   - En Cours:
-    - recuperer taille 1er piece
-    - recuperer 1er piece
-    - resolution
-    
-  - Pour la suite:
-    - verif taille tableau
-    - recup tableau
     - Algo de resolution
+
+  - Done:
+    - Récupération plateau
+    - Récupération pièce
+    - Infos dimension
+    - Infos joueurs
+    - Position de départ
