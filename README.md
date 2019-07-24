@@ -4,9 +4,10 @@
 
   - Pour la suite:
     - Check de l'intégrité des infos reçu
+    - GNL A REFAIRE
 
   - En Cours:
-    - Algo de resolution
+    - Algo de resolution -> récurtion trop lente
 
   - Done:
     - Récupération plateau
