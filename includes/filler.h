@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 05:35:28 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 07:55:44 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define	FILLER_H
 
 # include <includes.h>
+
+# define XPLUS 2
+# define XMOIN 4
+# define YPLUS 8
+# define YMOIN 16
 
 typedef struct		s_solve
 {
@@ -34,8 +39,10 @@ typedef struct		s_player
 	int				x_piec;
 	int				y_piec;
 	unsigned int	xy_piec;
-	unsigned int	y_start;
-	unsigned int	x_start;
+	int				y_start;
+	int				x_start;
+	int				y_op_st;
+	int				x_op_st;
 }					t_player;
 
 /* Structure Player */
@@ -59,5 +66,6 @@ int				get_piece(t_player *p);
 int				solve(t_player *p);
 void			print_answer(int y, int x);
 char			get_char_player(t_player *p);
+int				choose_solver(t_solve *s, t_player *p, int mask);
 
 #endif

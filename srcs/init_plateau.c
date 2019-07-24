@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 02:25:29 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 08:05:57 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				get_board_size(t_player *p)
 		ft_putstr("Bad board info\n");
 	else
 	{
+//		dprintf(2, "LINE |%s\n", p->line);
 		p->plateau = ft_strsplit(p->line, ' ');
 		if ((size = get_tab_size(p->plateau)) == 3
 			&& ft_strncmp(p->line, "Plateau", 7) == 0)
@@ -60,6 +61,7 @@ int				get_board(t_player *p)
 		return (-1);
 	while (y < (p->y_plat + 1) && get_next_line(0, &(p->line)) != -1)
 	{
+//		dprintf(2, "LINE |%s\n", p->line);
 		if (((p->plateau)[y] = (char*)malloc(sizeof(char) \
 										* (ft_strlen(p->line) + 1))) == NULL)
 			return (-1);

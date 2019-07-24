@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 07:52:02 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 01:44:05 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 08:49:31 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void			init_player_vars(t_player *p)
 	p->x_piec = 0;
 	p->y_piec = 0;
 	p->xy_piec = 0;
-	p->x_start = 0;
-	p->y_start = 0;
+	p->x_start = -1;
+	p->y_start = -1;
+	p->x_op_st = -1;
+	p->y_op_st = -1;
 }
 
 void			free_str(char **ptr)

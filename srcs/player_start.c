@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:46:14 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/20 05:35:46 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 08:46:08 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,36 @@ int				get_space(t_player *p)
 	return (0);
 }
 
-char			get_char_player(t_player *p)
-{
-	if (p->order == 1)
-		return ('O');
-	else
-		return ('X');
-}
-
 int				get_start(t_player *p)
 {
 	char		c;
+	char		op;
 	int			x;
 	int			y;
 
 	y = 0;
-	c = get_char_player(p);
+	c = (p->order == 1) ? 'O' : 'X';
+	op = (p->order == 1) ? 'X' : 'O';
 	while (y < p->y_plat)
 	{
 		x = 0;
 		while ((p->plateau)[y][x] != '\0')
 		{
-			if ((p->plateau)[y][x] == c)
+			if ((p->plateau)[y][x] == c || (p->plateau)[y][x] == (c + 32))
 			{
 				p->y_start = y;
 				p->x_start = x;
-				return (0);
+			}
+			if ((p->plateau)[y][x] == op || (p->plateau)[y][x] == (op + 32))
+			{
+				p->y_op_st = y;
+				p->x_op_st = x;
 			}
 			x++;
 		}
 		y++;
 	}
-	return (-1);
+	if (p->y_start == -1 || p->x_start == -1)
+		return (-1);
+	return (0);
 }
