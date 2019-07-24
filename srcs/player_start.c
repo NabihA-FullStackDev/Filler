@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:46:14 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 08:46:08 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 11:37:40 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int				get_start(t_player *p)
 	int			x;
 	int			y;
 
-	y = 0;
+	y = 1;
 	c = (p->order == 1) ? 'O' : 'X';
 	op = (p->order == 1) ? 'X' : 'O';
-	while (y < p->y_plat)
+	while (y < p->y_plat + 1)
 	{
-		x = 0;
-		while ((p->plateau)[y][x] != '\0')
+		x = p->space;
+		while (x < (p->x_plat + p->space) && (p->plateau)[y][x] != '\0')
 		{
 			if ((p->plateau)[y][x] == c || (p->plateau)[y][x] == (c + 32))
 			{

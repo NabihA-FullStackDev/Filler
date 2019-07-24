@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 22:29:01 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/19 23:23:14 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 12:29:08 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ int				get_piece_size(t_player *p)
 	return ((size == 3) ? 0 : -1);
 }
 
+void			tab_bzero(char ***tab, int size);
+
 int				get_piece(t_player *p)
 {
 	int		y;
 
 	y = 0;
-	if ((p->piece = (char**)malloc(sizeof(char*) * (p->y_piec))) == NULL)
+	if ((p->piece = (char**)malloc(sizeof(char*) * (p->y_piec /* + 1 */))) == NULL)
 		return (-1);
 	while (y < p->y_piec && get_next_line(0, &(p->line)) != -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: naali <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:29:53 by naali             #+#    #+#             */
-/*   Updated: 2019/07/24 07:26:38 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 12:25:52 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				main(void)
 		stop = solve(&p);
 		free_str_tab(&(p.plateau), p.y_plat + 1);
 		free_str_tab(&(p.piece), p.y_piec);
-//		dprintf(2, "pointer:\n- line = %p\n- plateau = %p\n- piece = %p\n", p.line, p.plateau, p.piece);
 	}
 	return (0);
 }
