@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/07/20 08:29:41 by nabih            ###   ########.fr        #
+#    Updated: 2019/07/24 19:09:45 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -68,10 +68,7 @@ clean			:
 fclean			:	clean
 					@echo "${rose}Fcleaning the project ...${neutre}\c"
 					@make fclean -C libft
-					@if [ -f "/tmp/doom_log2" ]; then \
-						rm /tmp/doom_log2; \
-					fi
-						@rm -rf $(NAME)
+					@rm -rf $(NAME)
 					@echo "${vertfonce}DONE${neutre}"
 					@rm -f filler.trace
 

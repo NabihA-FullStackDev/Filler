@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 12:25:09 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 14:08:21 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,10 @@ int				solve(t_player *p);
 void			print_answer(int y, int x);
 char			get_char_player(t_player *p);
 int				choose_solver(t_solve *s, t_player *p, int mask);
+int				check_contact(t_player *p, int x, int y);
+int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
+int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
+int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
+int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
 
 #endif

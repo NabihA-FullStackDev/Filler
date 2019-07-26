@@ -3,78 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 02:51:35 by naali             #+#    #+#             */
-/*   Updated: 2019/07/24 07:23:48 by nabih            ###   ########.fr       */
+/*   Created: 2019/07/24 18:53:57 by nabih             #+#    #+#             */
+/*   Updated: 2019/07/26 04:41:06 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
 #include "get_next_line.h"
 
-static unsigned int	ft_strclen(char *save)
+static unsigned int		check_str(char *str)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (save[i] != '\n' && save[i] != '\0')
-		i++;
+	if (str != NULL)
+	{
+		while (str[i] != '\n' && str[i] != '\0')
+			i++;
+	}
 	return (i);
 }
 
-static char			*ft_strrejoin(char *s1, char *s2, size_t len)
+static char				*choose_copy(char *tmp)
 {
-	char		*str;
-	int			nb;
-	char		*tmp;
-
-	nb = ft_strlen(s1) + ++len;
-	str = ft_strnew(nb);
-	tmp = str;
-	while (*s1)
-		*str++ = *s1++;
-	while (*s2 && --len > 0)
-		*str++ = *s2++;
-	*str = '\0';
-	return (str - (str - tmp));
-}
-
-static char			*ft_chrandcpy(char *save)
-{
-	if (ft_strchr(save, '\n'))
+	if (ft_strchr(tmp, '\n'))
 	{
-		ft_strcpy(save, ft_strchr(save, '\n') + 1);
-		return (save);
+		ft_strcpy(tmp, ft_strchr(tmp, '\n') + 1);
+		return (tmp);
 	}
-	if (ft_strclen(save) > 0)
+	if (check_str(tmp) > 0)
 	{
-		ft_strcpy(save, ft_strchr(save, '\0'));
-		return (save);
+		tmp = ft_strcpy(tmp, ft_strchr(tmp, '\0'));
+		return (tmp);
 	}
 	return (NULL);
 }
 
-int					get_next_line(int const fd, char **line)
+int						get_next_line(int const fd, char **line)
 {
-	char		buff[BUFF_SIZE + 1];
-	static char	*save[256];
-	int			res;
-	char		*ptr;
+	int			rd;
+	int			check;
+	static char	*tmp1 = NULL;
+	char		*tmp2;
+	char		buf[BUFF_SIZE + 1];
 
-	if (fd < 0 || BUFF_SIZE < 1 || !line || read(fd, buff, 0) < 0)
-		return (-1);
-	if (!(save[fd]) && (save[fd] = ft_strnew(0)) == NULL)
-		return (-1);
-	while (!(ft_strchr(save[fd], '\n')) &&
-	(res = read(fd, buff, BUFF_SIZE)) > 0)
+	rd = 0;
+	check = 0;
+	tmp2 = NULL;
+	if (fd >= 0 && line && BUFF_SIZE > 0 && read(fd, buf, 0) >= 0)
 	{
-		buff[res] = '\0';
-		ptr = save[fd];
-		save[fd] = ft_strrejoin(ptr, buff, res);
-		free(ptr);
+		*line = NULL;
+		while ((tmp1 == NULL || tmp1[(check = check_str(tmp1))] != '\n')
+			   && (rd = read(fd, buf, BUFF_SIZE)) > 0)
+		{
+			buf[rd] = '\0';
+			tmp2 = tmp1;
+			tmp1 = ft_strjoin(tmp1, buf);
+			ft_memdel((void**)(&tmp2));
+		}
+		*line = ft_strsub(tmp1, 0, check);
+		return ((choose_copy(tmp1) == NULL) ? 0 : 1);
 	}
-	*line = ft_strsub(save[fd], 0, ft_strclen(save[fd]));
-	if (ft_chrandcpy(save[fd]) == NULL)
-		return (0);
-	return (1);
+	return (-1);
 }

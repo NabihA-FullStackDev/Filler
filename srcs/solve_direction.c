@@ -6,23 +6,21 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 08:22:53 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 10:34:44 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 14:07:53 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
-
-int				check_contact(t_player *p, int x, int y);
 
 int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y)
 {
 	int			y_cp;
 
 	y_cp = y;
-	while (x <= p->x_plat + p->space - p->x_piec)
+	while (x < p->x_plat + p->space - p->x_piec)
 	{
 		y = y_cp;
-		while (y <= p->y_plat - p->y_piec)
+		while (y <= p->y_plat + 1 - p->y_piec)
 		{
 			if (check_contact(p, x, y) == 1)
 			{
@@ -45,7 +43,7 @@ int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y)
 	while (x < p->x_plat + p->space - p->y_piec)
 	{
 		y = y_cp;
-		while (y > 1)
+		while (y >= 1)
 		{
 			if (check_contact(p, x, y) == 1)
 			{
@@ -68,7 +66,7 @@ int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y)
 	while (x >= p->space)
 	{
 		y = y_cp;
-		while (y < p->y_plat - p->y_piec)
+		while (y < p->y_plat + 1 - p->y_piec)
 		{
 			if (check_contact(p, x, y) == 1)
 			{
@@ -91,7 +89,7 @@ int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y)
 	while (x >= p->space)
 	{
 		y = y_cp;
-		while (y > 1)
+		while (y >= 1)
 		{
 			if (check_contact(p, x, y) == 1)
 			{
@@ -142,7 +140,6 @@ int				choose_solver(t_solve *s, t_player *p, int mask)
 	change_xy(p, mask, &x, &y);
 	while (ret == 0 && old <= 30)
 	{
-		dprintf(2, "START\t(x = %d, y = %d)\nMASK\t(%d)\n", x, y, mask);
 		if (mask == 10)
 			ret = solve_xplus_yplus(s, p, x, y);
 		else if (mask == 18)

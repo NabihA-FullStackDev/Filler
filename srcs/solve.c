@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:19:37 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 09:57:31 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/24 14:08:15 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,17 @@ int				check_contact(t_player *p, int x, int y)
 	return (contact);
 }
 
-int				start_solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
-int				start_solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
-int				start_solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
-int				start_solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
-
 int				get_last_op_pos(t_player *p)
 {
 	char		op;
 	int			x;
 	int			y;
 
-	y = 0;
+	y = 1;
 	op = (p->order == 1) ? 'x' : 'o';
-	while (y < p->y_plat)
+	while (y < p->y_plat + 1)
 	{
-		x = 0;
+		x = p->space;
 		while ((p->plateau)[y][x] != '\0')
 		{
 			if ((p->plateau)[y][x] == op)
@@ -95,15 +90,12 @@ int				solve(t_player *p)
 	int			ret;
 	t_solve		s;
 	int			mask;
-	static int	test = 0;
 
 	ret = 0;
 	init_solve(&s, p);
-	test = (test == 0) ? get_last_op_pos(p) : -1;
-	mask = (p->x_start > p->x_op_st) ? XPLUS : XMOIN;
-	mask |= (p->y_start > p->y_op_st) ? YPLUS : YMOIN;
+	mask = (p->x_start >= p->x_op_st) ? XPLUS : XMOIN;
+	mask |= (p->y_start >= p->y_op_st) ? YPLUS : YMOIN;
 	ret = choose_solver(&s, p, mask);
-	dprintf(2, "X = %d, Y = %d\n", s.x, s.y);
 	print_answer(s.y - 1, s.x - p->space);
 	return (0);
 }
