@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 07:52:02 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 13:12:11 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/26 07:28:56 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int				get_order_num(t_player *p)
 		free_str(&(p->line));
 		return (-1);
 	}
-	if (ft_strcmp(p->line, "$$$ exec p1 : [./naali.filler]") == 0)
+	if (ft_strncmp(p->line, "$$$ exec p1 :", 13) == 0)
 		p->order = 1;
-	else if (ft_strcmp(p->line, "$$$ exec p2 : [./naali.filler]") == 0)
+	else if (ft_strncmp(p->line, "$$$ exec p2 :", 13) == 0)
 		p->order = 2;
 	else
 		ft_putstr("Bad player info\n");

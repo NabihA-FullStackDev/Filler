@@ -6,7 +6,7 @@
 /*   By: naali <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 16:29:53 by naali             #+#    #+#             */
-/*   Updated: 2019/07/24 12:25:52 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/26 09:34:17 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int		first_call(t_player *p)
 	int			stop;
 
 	stop = 0;
-	stop = get_everything(p);
+	if ((stop = get_everything(p)) == -1)
+		return (-1);
 	if (get_space(p) == -1)
 		return (-1);
 	if (get_start(p) == -1)

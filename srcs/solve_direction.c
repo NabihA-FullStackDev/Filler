@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 08:22:53 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 14:07:53 by nabih            ###   ########.fr       */
+/*   Updated: 2019/07/26 09:07:05 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int				change_mask(int *mask)
 
 void			change_xy(t_player *p, int mask, int *x, int *y)
 {
-	*x = (mask == 10 || mask == 18) ? p->space : p->x_plat + p->space - p->x_piec;
-	*y = (mask == 10 || mask == 12) ? 1 : (p->y_plat - p->y_piec);
+	*x = (mask == 10 || mask == 18) ? p->space : p->x_plat + p->space - p->x_piec - 1;
+	*y = (mask == 10 || mask == 12) ? 1 : (p->y_plat - p->y_piec - 1);
 }
 
 int				choose_solver(t_solve *s, t_player *p, int mask)
@@ -138,7 +138,7 @@ int				choose_solver(t_solve *s, t_player *p, int mask)
 	ret = 0;
 	old = 0;
 	change_xy(p, mask, &x, &y);
-	while (ret == 0 && old <= 30)
+	while (ret == 0 && old <= 60)
 	{
 		if (mask == 10)
 			ret = solve_xplus_yplus(s, p, x, y);
