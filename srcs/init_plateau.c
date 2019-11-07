@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/26 09:31:36 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/07 14:27:17 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ void			tab_bzero(char ***tab, int size)
 	(*tab)[i] = NULL;
 }
 
+int				init_cp_plat(t_player *p, int x, int y)
+{
+	int			i;
+
+	i = 0;
+	if (((p->cp_plat) = (char**)malloc(sizeof(char*) * y)) == NULL)
+		return (-1);
+	while (i < y)
+	{
+		if (((p->cp_plat)[i] = (char*)malloc(sizeof(char) * x)) == NULL)
+			return (-1);
+		ft_strcpy((p->cp_plat)[i], (p->plateau)[i]);
+		i++;
+	}
+	return (0);
+}
+
 int				get_board(t_player *p)
 {
 	int		y;
@@ -80,6 +97,18 @@ int				get_board(t_player *p)
 		free_str(&(p->line));
 		y++;
 	}
+	/* TEST + MODIFICATION*/
+	ft_putstr("plateau:\n");
+	print_tab_for_test(p->plateau, p->y_plat);
+	if (p->cp_plat == NULL)
+		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), (p->y_plat + 1));
+	else
+		cpy_plateau(p->cp_plat, (const char**)p->plateau, p->y_plat + 1);
+	ft_putchar('\n');
+	ft_putstr("cp_plat:\n");
+	print_tab_for_test(p->cp_plat, p->y_plat);
+	ft_putchar('\n');
+	/* TEST + MODIFICATION*/
 	free_str(&(p->line));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 14:08:21 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/07 14:26:17 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_player
 	int				order;
 	int				space;
 	char			**plateau;
+	char			**cp_plat;
 	int				x_plat;
 	int				y_plat;
 	unsigned int	xy_plat;
@@ -72,5 +73,10 @@ int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
 int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
 int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
 int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
+
+char			**cpy_plateau(char **dst, const char **src, unsigned int max);
+
+/* TEST A SUPPRIMER */
+void			print_tab_for_test(char **tab, int size);
 
 #endif

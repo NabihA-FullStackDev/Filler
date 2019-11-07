@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/07/24 19:09:45 by nabih            ###   ########.fr        #
+#    Updated: 2019/11/07 14:25:53 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,7 +32,10 @@ SRC				=	main.c				\
 					piece.c				\
 					solve.c				\
 					solve_direction.c	\
-					print_answer.c
+					print_answer.c		\
+					free_things.c		\
+					copy_tab.c			\
+					test.c
 
 OBJ 			=	$(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
 

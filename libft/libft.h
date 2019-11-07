@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:08:09 by naali             #+#    #+#             */
-/*   Updated: 2019/03/07 10:52:01 by naali            ###   ########.fr       */
+/*   Updated: 2019/11/07 14:10:42 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ void			ft_lstlast(t_list **alst, t_list *new);
 t_list			*ft_listfind(t_list *alst, void *content, size_t c_size);
 size_t			ft_lstsize(t_list *alst);
 t_list			*ft_lstfindsize(t_list *alst, size_t c_size);
+
+char			**ft_tabcpy(char **dst, const char **src, unsigned int max);
 
 #endif

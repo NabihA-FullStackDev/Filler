@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:37:58 by naali             #+#    #+#             */
-/*   Updated: 2019/11/07 13:55:13 by nabih            ###   ########.fr       */
+/*   Created: 2019/11/07 13:45:01 by nabih             #+#    #+#             */
+/*   Updated: 2019/11/07 13:46:10 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char			*ft_strcpy(char *dst, const char *src)
+#include <filler.h>
+
+void			print_tab_for_test(char **tab, int size)
 {
-	unsigned int	i;
+	int			i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (i < size)
 	{
-		dst[i] = src[i];
-		i = i + 1;
+		ft_putstr(tab[i]);
+		ft_putchar('\n');
+		i++;
 	}
-	dst[i] = '\0';
-	return (dst);
 }
