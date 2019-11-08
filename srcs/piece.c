@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 22:29:01 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/24 12:29:08 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/07 23:56:15 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,65 @@ int				get_piece_size(t_player *p)
 	return ((size == 3) ? 0 : -1);
 }
 
-void			tab_bzero(char ***tab, int size);
+int				fill_vectors(t_player *p, char **piece, int nb)
+{
+	int			i;
+	int			x;
+	int			y;
+
+	i = 1;
+	y = p->s_piec.y;
+	x = -1;
+	if ((p->s_piec.vec_piec = (t_solve*)malloc(sizeof(t_solve) * (nb + 1))) == NULL)
+		return (-1);
+	(p->s_piec.vec_piec)[0].x = 0;
+	(p->s_piec.vec_piec)[0].y = 0;
+	while (y < p->y_piec)
+	{
+		x = (x == -1) ? (p->s_piec.x + 1) : 0;
+		while (x < p->x_piec)
+		{
+			if (piece[y][x] == '*')
+			{
+				(p->s_piec.vec_piec)[i].x = x - p->s_piec.x;
+				(p->s_piec.vec_piec)[i].y = y - p->s_piec.y;
+				i++;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int				init_piece_struct(t_player *p, char **piece)
+{
+	int			x;
+	int			y;
+	int			flg;
+
+	y = 0;
+	flg = 0;
+	p->s_piec.nb = 0;
+	p->s_piec.vec_piec = NULL;
+	while (y < p->y_piec)
+	{
+		x = 0;
+		while (piece[y][x] != '\0')
+		{
+			if (piece[y][x] == '*' && flg == 0)
+			{
+				p->s_piec.x = x;
+				p->s_piec.y = y;
+				flg = 1;
+			}
+			(piece[y][x] == '*') ? p->s_piec.nb++ : 0;
+			x++;
+		}
+		y++;
+	}
+	return (fill_vectors(p, piece, p->s_piec.nb));
+}
 
 int				get_piece(t_player *p)
 {
@@ -59,6 +117,11 @@ int				get_piece(t_player *p)
 		free_str(&(p->line));
 		y++;
 	}
+	if (init_piece_struct(p, p->piece) == -1)
+		return (-1);
+	printf("S_PIECE INFO:\n- x = %d\n- y = %d\n- nb* = %d\n", p->s_piec.x, p->s_piec.y, p->s_piec.nb);
+	for (unsigned int i = 0; i < p->s_piec.nb; i++)
+		printf("VEC_PIEC[%d].x = %d\nVEC_PIEC[%d].y = %d\n", i, (p->s_piec.vec_piec)[i].x, i, (p->s_piec.vec_piec)[i].y);
 	free_str(&(p->line));
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/11/07 14:25:53 by nabih            ###   ########.fr        #
+#    Updated: 2019/11/07 21:23:36 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,6 +19,8 @@ NAME			=	naali.filler
 CC				=	gcc
 
 CFLAG 			=	-Wall -Wextra -Werror
+#-fsanitize=address
+
 
 INCLUDES		=	-I./includes	\
 					-I./libft

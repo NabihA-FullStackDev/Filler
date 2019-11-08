@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/07 14:27:17 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/08 01:07:00 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,14 @@ int				init_cp_plat(t_player *p, int x, int y)
 	i = 0;
 	if (((p->cp_plat) = (char**)malloc(sizeof(char*) * y)) == NULL)
 		return (-1);
+	if (((p->value) = (char**)malloc(sizeof(char*) * y)) == NULL)
+		return (-1);
 	while (i < y)
 	{
 		if (((p->cp_plat)[i] = (char*)malloc(sizeof(char) * x)) == NULL)
 			return (-1);
 		ft_strcpy((p->cp_plat)[i], (p->plateau)[i]);
+		(p->value)[i] = ft_strdup((p->cp_plat)[i]);
 		i++;
 	}
 	return (0);
@@ -83,8 +86,10 @@ int				init_cp_plat(t_player *p, int x, int y)
 
 int				get_board(t_player *p)
 {
+	int		i;
 	int		y;
 
+	i = -1;
 	y = 0;
 	if ((p->plateau = (char**)malloc(sizeof(char*) * (p->y_plat + 1))) == NULL)
 		return (-1);
@@ -97,16 +102,29 @@ int				get_board(t_player *p)
 		free_str(&(p->line));
 		y++;
 	}
+	if (p->cp_plat == NULL)
+		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), \
+					(p->y_plat + 1));
+	else
+	{
+		cpy_plateau(p->cp_plat, (const char**)p->plateau, \
+					(p->y_plat + 1));
+		cpy_plateau(p->value, (const char**)p->plateau, \
+					(p->y_plat + 1));
+	}
 	/* TEST + MODIFICATION*/
 	ft_putstr("plateau:\n");
 	print_tab_for_test(p->plateau, p->y_plat);
-	if (p->cp_plat == NULL)
-		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), (p->y_plat + 1));
-	else
-		cpy_plateau(p->cp_plat, (const char**)p->plateau, p->y_plat + 1);
 	ft_putchar('\n');
 	ft_putstr("cp_plat:\n");
 	print_tab_for_test(p->cp_plat, p->y_plat);
+	ft_putchar('\n');
+	ft_putstr("value:\n");
+
+	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', '9');
+	while (++i < 8)
+		update_tab_value(&(p->value), p->y_plat, '9' - i, '8' - i);
+	print_tab_for_test(p->value, p->y_plat);
 	ft_putchar('\n');
 	/* TEST + MODIFICATION*/
 	free_str(&(p->line));
