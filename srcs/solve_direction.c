@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 08:22:53 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/26 09:07:05 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 03:58:28 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,93 +15,101 @@
 int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y)
 {
 	int			y_cp;
+	int			ret;
 
 	y_cp = y;
-	while (x < p->x_plat + p->space - p->x_piec)
+	ret = 0;
+	while (x <= p->x_plat + p->space)
 	{
 		y = y_cp;
-		while (y <= p->y_plat + 1 - p->y_piec)
+		while (y <= p->y_plat + 1)
 		{
-			if (check_contact(p, x, y) == 1)
+			if (check_contact(p, &(p->s_piec), x, y) == 1)
 			{
+				ret = 1;
 				s->x = x;
 				s->y = y;
-				return (1);
 			}
 			y++;
 		}
 		x++;
 	}
-	return (0);
+	return (ret);
 }
 
 int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y)
 {
 	int			y_cp;
+	int			ret;
 
 	y_cp = y;
-	while (x < p->x_plat + p->space - p->y_piec)
+	ret = 0;
+	while (x <= p->x_plat + p->space)
 	{
 		y = y_cp;
 		while (y >= 1)
 		{
-			if (check_contact(p, x, y) == 1)
+			if (check_contact(p, &(p->s_piec), x, y) == 1)
 			{
+				ret = 1;
 				s->x = x;
 				s->y = y;
-				return (1);
 			}
 			y--;
 		}
 		x++;
 	}
-	return (0);
+	return (ret);
 }
 
 int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y)
 {
 	int			y_cp;
+	int			ret;
 
 	y_cp = y;
+	ret = 0;
 	while (x >= p->space)
 	{
 		y = y_cp;
-		while (y < p->y_plat + 1 - p->y_piec)
+		while (y <= p->y_plat + 1)
 		{
-			if (check_contact(p, x, y) == 1)
+			if (check_contact(p, &(p->s_piec), x, y) == 1)
 			{
+				ret = 1;
 				s->x = x;
 				s->y = y;
-				return (1);
 			}
 			y++;
 		}
 		x--;
 	}
-	return (0);
+	return (ret);
 }
 
 int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y)
 {
-	int			y_cp;
+	int			x_cp;
+	int			ret;
 
-	y_cp = y;
-	while (x >= p->space)
+	x_cp = x;
+	ret = 0;
+	while (y >= 1)
 	{
-		y = y_cp;
-		while (y >= 1)
+		x = x_cp;
+		while (x >= p->space)
 		{
-			if (check_contact(p, x, y) == 1)
+			if (check_contact(p, &(p->s_piec), x, y) == 1)
 			{
+				ret = 1;
 				s->x = x;
 				s->y = y;
-				return (1);
 			}
-			y--;
+			x--;
 		}
-		x--;
+		y--;
 	}
-	return (0);
+	return (ret);
 }
 
 int				change_mask(int *mask)
@@ -122,8 +130,8 @@ int				change_mask(int *mask)
 
 void			change_xy(t_player *p, int mask, int *x, int *y)
 {
-	*x = (mask == 10 || mask == 18) ? p->space : p->x_plat + p->space - p->x_piec - 1;
-	*y = (mask == 10 || mask == 12) ? 1 : (p->y_plat - p->y_piec - 1);
+	*x = (mask == 10 || mask == 18) ? p->space : p->x_plat + p->space;
+	*y = (mask == 10 || mask == 12) ? 1 : p->y_plat;
 }
 
 int				choose_solver(t_solve *s, t_player *p, int mask)
@@ -150,6 +158,7 @@ int				choose_solver(t_solve *s, t_player *p, int mask)
 			ret = solve_xminus_yminus(s, p, x, y);
 		old = change_mask(&mask);
 		change_xy(p, mask, &x, &y);
+		p->flag = 0;
 	}
 	return (ret);
 }

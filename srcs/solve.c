@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:19:37 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/26 09:08:05 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 03:57:58 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,54 @@
 
 static void		init_solve(t_solve *s, t_player *p)
 {
-	s->x = (p->x_start - p->x_piec > p->space) ? (p->x_start - p->x_piec + 1) : p->x_start;
-	s->y = (p->y_start - p->y_piec > 1) ? (p->y_start - p->y_piec + 1) : p->y_start;
+	s->x = p->x_start - p->space;
+	s->y = p->y_start - 1;
 }
 
-int				check_contact(t_player *p, int x, int y)
+int				return_value_check(t_player *p, t_resolution *res)
 {
-	int		i;
-	int		j;
-	char	c;
-	char	op;
-	int		contact;
+	static int	old_pts = 0;
+
+	if (p->flag == 0)
+	{
+		old_pts = 0;
+		p->flag = 1;
+	}
+	if (res->contact == 1 && old_pts < res->new_pts)
+	{
+		old_pts = res->new_pts;
+		return (res->contact);
+	}
+	return (0);
+}
+
+int				check_contact(t_player *p, t_piece *pi, int x, int y)
+{
+	unsigned int	i;
+	t_resolution	res;
+	t_solve			*tmp;
 
 	i = 0;
-	contact = 0;
-	c = (p->order == 1) ? 'O' : 'X';
-	op = (c == 'O') ? 'X' : 'O';
-	while (i < p->y_piec && (y + i) < (p->y_plat + 1))
+	res.contact = 0;
+	res.new_pts = 0;
+	res.c = (p->order == 1) ? 'O' : 'X';
+	res.op = (res.c == 'O') ? 'X' : 'O';
+	tmp = pi->vec_piec;
+	while (i < pi->nb)
 	{
-		j = 0;
-		while (p->piece[i][j] && j < p->x_piec)
-		{
-			if ((p->piece)[i][j] == '*'
-				&& ((x + j) >= (p->x_plat + p->space)
-				|| (y + i) >= (p->y_plat + 1)))
-				return (-1);
-			if ((p->piece)[i][j] == '*'
-				&& ((p->plateau)[y + i][x + j] == c))
-				contact += 1;
-			if ((p->piece)[i][j] == '*'
-				&& ((p->plateau)[y + i][x + j] == op))
-				return (0);
-			j++;
-		}
+		if (((x + tmp[i].x) >= (p->x_plat + p->space)
+				|| (y + tmp[i].y) >= (p->y_plat + 1)))
+			return (-1);
+		if ((x + tmp[i].x) < p->space || (y + tmp[i].y) == 0)
+			return (-1);
+		if ((p->plateau)[y + tmp[i].y][x + tmp[i].x] == res.c)
+			res.contact += 1;
+		if ((p->plateau)[y + tmp[i].y][x + tmp[i].x] == res.op)
+			return (0);
+		res.new_pts += (int)(p->value[y + tmp[i].y][x + tmp[i].x] - '0');
 		i++;
 	}
-	/* if (p->piece[i - 1][j] != '\0') */
-	/* 	return (-1); */
-	return (contact);
+	return (return_value_check(p, &res));
 }
 
 int				solve(t_player *p)
@@ -65,6 +75,6 @@ int				solve(t_player *p)
 	mask = (p->x_start >= p->x_op_st) ? XPLUS : XMOIN;
 	mask |= (p->y_start >= p->y_op_st) ? YPLUS : YMOIN;
 	ret = choose_solver(&s, p, mask);
-	print_answer(s.y - 1, s.x - p->space);
+	print_answer(s.y - 1 - p->s_piec.y, s.x - p->space - p->s_piec.x);
 	return (0);
 }

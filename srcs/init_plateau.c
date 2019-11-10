@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/08 01:07:00 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 03:46:43 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				get_board_size(t_player *p)
 			p->x_plat = ((p->plateau)[2] != NULL) ?
 				ft_atoi((p->plateau)[2]) : 0;
 		}
-		free_str_tab(&(p->plateau), size);
+		free_str_tab(&(p->plateau), size/* + 1*/);
 		if (p->y_plat == 0 || p->x_plat == 0)
 		{
 			ft_putstr("Bad board info\n");
@@ -69,16 +69,13 @@ int				init_cp_plat(t_player *p, int x, int y)
 	int			i;
 
 	i = 0;
-	if (((p->cp_plat) = (char**)malloc(sizeof(char*) * y)) == NULL)
-		return (-1);
 	if (((p->value) = (char**)malloc(sizeof(char*) * y)) == NULL)
 		return (-1);
 	while (i < y)
 	{
-		if (((p->cp_plat)[i] = (char*)malloc(sizeof(char) * x)) == NULL)
+		if (((p->value)[i] = (char*)malloc(sizeof(char) * x)) == NULL)
 			return (-1);
-		ft_strcpy((p->cp_plat)[i], (p->plateau)[i]);
-		(p->value)[i] = ft_strdup((p->cp_plat)[i]);
+		ft_strcpy((p->value)[i], (p->plateau)[i]);
 		i++;
 	}
 	return (0);
@@ -91,42 +88,34 @@ int				get_board(t_player *p)
 
 	i = -1;
 	y = 0;
-	if ((p->plateau = (char**)malloc(sizeof(char*) * (p->y_plat + 1))) == NULL)
+	if ((p->plateau = (char**)malloc(sizeof(char*) \
+									 * (p->y_plat + 1))) == NULL)
 		return (-1);
-	while (y < (p->y_plat + 1) && get_next_line(0, &(p->line)) != -1)
+	while (y < (p->y_plat + 1) \
+		   && get_next_line(0, &(p->line)) != -1)
 	{
 		if (((p->plateau)[y] = (char*)malloc(sizeof(char) \
-								* (ft_strlen(p->line) + 1))) == NULL)
+									* (ft_strlen(p->line) + 1))) == NULL)
 			return (-1);
 		ft_strcpy((p->plateau)[y], p->line);
 		free_str(&(p->line));
 		y++;
 	}
-	if (p->cp_plat == NULL)
+	if (p->value == NULL)
 		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), \
-					(p->y_plat + 1));
+					 (p->y_plat + 1));
 	else
-	{
-		cpy_plateau(p->cp_plat, (const char**)p->plateau, \
-					(p->y_plat + 1));
 		cpy_plateau(p->value, (const char**)p->plateau, \
 					(p->y_plat + 1));
-	}
-	/* TEST + MODIFICATION*/
-	ft_putstr("plateau:\n");
-	print_tab_for_test(p->plateau, p->y_plat);
-	ft_putchar('\n');
-	ft_putstr("cp_plat:\n");
-	print_tab_for_test(p->cp_plat, p->y_plat);
-	ft_putchar('\n');
-	ft_putstr("value:\n");
-
 	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', '9');
+//	update_tab_value(&(p->value), p->y_plat, (p->order == 2) ? 'X' : 'O', '9');
 	while (++i < 8)
 		update_tab_value(&(p->value), p->y_plat, '9' - i, '8' - i);
-	print_tab_for_test(p->value, p->y_plat);
-	ft_putchar('\n');
-	/* TEST + MODIFICATION*/
+	/* i = -1; */
+	/* while (++i < 8) */
+	/* 	update_tab_value(&(p->value), p->y_plat, '1' + i, '2' + i); */
+	fill_value(&(p->value), p->y_plat + 1);
+//	print_tab_for_test(p->value, p->y_plat + 1);
 	free_str(&(p->line));
 	return (0);
 }

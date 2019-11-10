@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 07:52:02 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/07 13:39:53 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 02:22:16 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void			init_player_vars(t_player *p)
 	p->order = 0;
 	p->plateau = NULL;
 	p->cp_plat = NULL;
+	p->value = NULL;
 	p->x_plat = 0;
 	p->y_plat = 0;
 	p->xy_plat = 0;
@@ -29,6 +30,7 @@ void			init_player_vars(t_player *p)
 	p->y_start = -1;
 	p->x_op_st = -1;
 	p->y_op_st = -1;
+	p->flag = 0;
 }
 
 int				get_order_num(t_player *p)

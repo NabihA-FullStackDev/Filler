@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/08 00:55:34 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 01:02:06 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ typedef struct		s_solve
 	int			x;
 	int			y;
 }					t_solve;
+
+typedef struct		s_resolution
+{
+	unsigned int	i;
+	char			c;
+	char			op;
+	int				contact;
+	int				new_pts;
+}					t_resolution;
 
 typedef struct		s_piece
 {
@@ -57,6 +66,8 @@ typedef struct		s_player
 	int				x_start;
 	int				y_op_st;
 	int				x_op_st;
+
+	int				flag;
 }					t_player;
 
 /* Structure Player */
@@ -81,7 +92,10 @@ int				solve(t_player *p);
 void			print_answer(int y, int x);
 char			get_char_player(t_player *p);
 int				choose_solver(t_solve *s, t_player *p, int mask);
-int				check_contact(t_player *p, int x, int y);
+
+//int				check_contact(t_player *p, int x, int y);
+int				check_contact(t_player *p, t_piece *pi, int x, int y);
+
 int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
 int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
 int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
@@ -89,6 +103,7 @@ int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
 
 char			**cpy_plateau(char **dst, const char **src, unsigned int max);
 void			update_tab_value(char ***val, int max, char start, char new_c);
+void			fill_value(char ***val, int max);
 void			tab_bzero(char ***tab, int size);
 
 /* TEST A SUPPRIMER */

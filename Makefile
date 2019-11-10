@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/11/07 21:23:36 by nabih            ###   ########.fr        #
+#    Updated: 2019/11/10 04:00:43 by nabih            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,8 +19,6 @@ NAME			=	naali.filler
 CC				=	gcc
 
 CFLAG 			=	-Wall -Wextra -Werror
-#-fsanitize=address
-
 
 INCLUDES		=	-I./includes	\
 					-I./libft
@@ -36,8 +34,7 @@ SRC				=	main.c				\
 					solve_direction.c	\
 					print_answer.c		\
 					free_things.c		\
-					copy_tab.c			\
-					test.c
+					copy_tab.c
 
 OBJ 			=	$(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
 

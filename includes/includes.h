@@ -6,14 +6,12 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:56 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/19 00:44:15 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 04:01:35 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		INCLUDES_H
 # define	INCLUDES_H
-
-# include <stdio.h>
 
 # include <stdlib.h>
 # include <sys/types.h>

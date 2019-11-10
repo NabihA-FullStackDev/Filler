@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 22:29:01 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/07 23:56:15 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 03:57:14 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				get_piece_size(t_player *p)
 	int		size;
 
 	if ((size = get_next_line(0, &(p->line))) == -1)
-		ft_putstr("Bad piece info 1\n");
+		ft_putstr_fd("Bad piece info 1\n",2);
 	else
 	{
 		p->piece = ft_strsplit(p->line, ' ');
@@ -29,10 +29,10 @@ int				get_piece_size(t_player *p)
 			p->x_piec = ((p->piece)[2] != NULL) ?
 				ft_atoi((p->piece)[2]) : 0;
 		}
-		free_str_tab(&(p->piece), size);
+		free_str_tab(&(p->piece), size + 1);
 		if (p->y_piec == 0 || p->x_piec == 0)
 		{
-			ft_putstr("Bad piece info 2\n");
+			ft_putstr_fd("Bad piece info 2\n", 2);
 			free_str(&(p->line));
 			return (-1);
 		}
@@ -50,7 +50,7 @@ int				fill_vectors(t_player *p, char **piece, int nb)
 	i = 1;
 	y = p->s_piec.y;
 	x = -1;
-	if ((p->s_piec.vec_piec = (t_solve*)malloc(sizeof(t_solve) * (nb + 1))) == NULL)
+	if ((p->s_piec.vec_piec = (t_solve*)malloc(sizeof(t_solve) * nb)) == NULL)
 		return (-1);
 	(p->s_piec.vec_piec)[0].x = 0;
 	(p->s_piec.vec_piec)[0].y = 0;
@@ -106,22 +106,19 @@ int				get_piece(t_player *p)
 	int		y;
 
 	y = 0;
-	if ((p->piece = (char**)malloc(sizeof(char*) * (p->y_piec /* + 1 */))) == NULL)
+	if ((p->piece = (char**)malloc(sizeof(char*) * (p->y_piec))) == NULL)
 		return (-1);
 	while (y < p->y_piec && get_next_line(0, &(p->line)) != -1)
 	{
 		if (((p->piece)[y] = (char*)malloc(sizeof(char) \
-										* (ft_strlen(p->line) + 1))) == NULL)
+								* (ft_strlen(p->line) + 1))) == NULL)
 			return (-1);
 		ft_strcpy((p->piece)[y], p->line);
 		free_str(&(p->line));
 		y++;
 	}
+	free_str(&(p->line));
 	if (init_piece_struct(p, p->piece) == -1)
 		return (-1);
-	printf("S_PIECE INFO:\n- x = %d\n- y = %d\n- nb* = %d\n", p->s_piec.x, p->s_piec.y, p->s_piec.nb);
-	for (unsigned int i = 0; i < p->s_piec.nb; i++)
-		printf("VEC_PIEC[%d].x = %d\nVEC_PIEC[%d].y = %d\n", i, (p->s_piec.vec_piec)[i].x, i, (p->s_piec.vec_piec)[i].y);
-	free_str(&(p->line));
 	return (0);
 }
