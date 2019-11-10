@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 01:02:06 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/10 04:11:58 by nabih            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct		s_solve
 
 typedef struct		s_resolution
 {
-	unsigned int	i;
 	char			c;
 	char			op;
 	int				contact;
@@ -48,25 +47,18 @@ typedef struct		s_player
 	char			*line;
 	int				order;
 	int				space;
-
 	char			**plateau;
-	char			**cp_plat;
 	char			**value;
 	int				x_plat;
 	int				y_plat;
-	unsigned int	xy_plat;
-
 	t_piece			s_piec;
 	char			**piece;
 	int				x_piec;
 	int				y_piec;
-	unsigned int	xy_piec;
-
 	int				y_start;
 	int				x_start;
 	int				y_op_st;
 	int				x_op_st;
-
 	int				flag;
 }					t_player;
 
