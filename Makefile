@@ -6,7 +6,7 @@
 #    By: naali <naali@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 16:13:53 by naali             #+#    #+#              #
-#    Updated: 2019/11/10 04:00:43 by nabih            ###   ########.fr        #
+#    Updated: 2019/11/12 13:13:04 by naali            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,6 +31,7 @@ SRC				=	main.c				\
 					init_plateau.c		\
 					piece.c				\
 					solve.c				\
+					choose_solver.c		\
 					solve_direction.c	\
 					print_answer.c		\
 					free_things.c		\

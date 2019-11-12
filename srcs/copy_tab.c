@@ -6,11 +6,11 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 14:21:45 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 03:00:00 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/12 13:05:49 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <filler.h>
 
 char			**cpy_plateau(char **dst, const char **src, unsigned int max)
 {
@@ -44,10 +44,14 @@ void			update_tab_value(char ***val, int max, char start, char new_c)
 		{
 			if ((*val)[y][x] == start)
 			{
-				(x > 0 && (*val)[y][x - 1] == '.') ? (*val)[y][x - 1] = new_c : 0;
-				(y > 1 && (*val)[y - 1][x] == '.') ? (*val)[y - 1][x] = new_c : 0;
-				((*val)[y][x + 1] != '\0' && (*val)[y][x + 1] == '.') ? (*val)[y][x + 1] = new_c : 0;
-				(y < (max - 1) && (*val)[y + 1][x] == '.') ? (*val)[y + 1][x] = new_c : 0;
+				(x > 0 && (*val)[y][x - 1] == '.') ? \
+					(*val)[y][x - 1] = new_c : 0;
+				(y > 1 && (*val)[y - 1][x] == '.') ? \
+					(*val)[y - 1][x] = new_c : 0;
+				((*val)[y][x + 1] != '\0' && (*val)[y][x + 1] == '.') ? \
+					(*val)[y][x + 1] = new_c : 0;
+				(y < (max - 1) && (*val)[y + 1][x] == '.') ? \
+					(*val)[y + 1][x] = new_c : 0;
 			}
 			x++;
 		}
@@ -72,4 +76,14 @@ void			fill_value(char ***val, int max)
 		}
 		y++;
 	}
+}
+
+void			new_or_copy_tab(t_player *p)
+{
+	if (p->value == NULL)
+		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), \
+						(p->y_plat + 1));
+	else
+		cpy_plateau(p->value, (const char**)p->plateau, \
+					(p->y_plat + 1));
 }

@@ -6,15 +6,14 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 04:11:58 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/12 13:04:17 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		FILLER_H
-# define	FILLER_H
+#ifndef FILLER_H
+# define FILLER_H
 
 # include <includes.h>
-
 # define XPLUS 2
 # define XMOIN 4
 # define YPLUS 8
@@ -62,43 +61,49 @@ typedef struct		s_player
 	int				flag;
 }					t_player;
 
-/* Structure Player */
-void			init_player_vars(t_player *p);
-void			free_str(char **ptr);
-void			free_str_tab(char ***ptr, int size);
-int				get_order_num(t_player *p);
-int				get_space(t_player *p);
-int				get_start(t_player *p);
+/*
+** Structure Player
+*/
+void				init_player_vars(t_player *p);
+void				free_str(char **ptr);
+void				free_str_tab(char ***ptr, int size);
+int					get_order_num(t_player *p);
+int					get_space(t_player *p);
+int					get_start(t_player *p);
 
-/* READ Plateau et Piece */
-int				get_tab_size(char **tab);
+/*
+** READ Plateau et Piece
+*/
+int					get_tab_size(char **tab);
 
-int				get_board_size(t_player *p);
-int				get_board(t_player *p);
+int					get_board_size(t_player *p);
+int					get_board(t_player *p);
 
-int				get_piece_size(t_player *p);
-int				get_piece(t_player *p);
+int					get_piece_size(t_player *p);
+int					get_piece(t_player *p);
 
-/* Resolution du Tableau */
-int				solve(t_player *p);
-void			print_answer(int y, int x);
-char			get_char_player(t_player *p);
-int				choose_solver(t_solve *s, t_player *p, int mask);
+/*
+** Resolution du Tableau
+*/
+int					solve(t_player *p);
+void				print_answer(int y, int x);
+char				get_char_player(t_player *p);
+int					choose_solver(t_solve *s, t_player *p, int mask);
 
-//int				check_contact(t_player *p, int x, int y);
-int				check_contact(t_player *p, t_piece *pi, int x, int y);
+int					check_contact(t_player *p, t_piece *pi, int x, int y);
 
-int				solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
-int				solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
-int				solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
-int				solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
+int					solve_xplus_yplus(t_solve *s, t_player *p, int x, int y);
+int					solve_xplus_yminus(t_solve *s, t_player *p, int x, int y);
+int					solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
+int					solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
 
-char			**cpy_plateau(char **dst, const char **src, unsigned int max);
-void			update_tab_value(char ***val, int max, char start, char new_c);
-void			fill_value(char ***val, int max);
-void			tab_bzero(char ***tab, int size);
-
-/* TEST A SUPPRIMER */
-void			print_tab_for_test(char **tab, int size);
+int					init_cp_plat(t_player *p, int x, int y);
+void				new_or_copy_tab(t_player *p);
+char				**cpy_plateau(char **dst, const char **src,
+									unsigned int max);
+void				update_tab_value(char ***val, int max, char start,
+									char new_c);
+void				fill_value(char ***val, int max);
+void				tab_bzero(char ***tab, int size);
 
 #endif

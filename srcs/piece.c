@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 22:29:01 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 03:57:14 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/12 13:10:31 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				get_piece_size(t_player *p)
 	int		size;
 
 	if ((size = get_next_line(0, &(p->line))) == -1)
-		ft_putstr_fd("Bad piece info 1\n",2);
+		ft_putstr_fd("Bad piece info 1\n", 2);
 	else
 	{
 		p->piece = ft_strsplit(p->line, ' ');
@@ -47,22 +47,20 @@ int				fill_vectors(t_player *p, char **piece, int nb)
 	int			x;
 	int			y;
 
-	i = 1;
+	i = 0;
 	y = p->s_piec.y;
 	x = -1;
 	if ((p->s_piec.vec_piec = (t_solve*)malloc(sizeof(t_solve) * nb)) == NULL)
 		return (-1);
-	(p->s_piec.vec_piec)[0].x = 0;
-	(p->s_piec.vec_piec)[0].y = 0;
 	while (y < p->y_piec)
 	{
-		x = (x == -1) ? (p->s_piec.x + 1) : 0;
+		x = (x == -1) ? p->s_piec.x : 0;
 		while (x < p->x_piec)
 		{
 			if (piece[y][x] == '*')
 			{
-				(p->s_piec.vec_piec)[i].x = x - p->s_piec.x;
-				(p->s_piec.vec_piec)[i].y = y - p->s_piec.y;
+				(p->s_piec.vec_piec)[i].x = (i == 0) ? 0 : x - p->s_piec.x;
+				(p->s_piec.vec_piec)[i].y = (i == 0) ? 0 : y - p->s_piec.y;
 				i++;
 			}
 			x++;

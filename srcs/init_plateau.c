@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 03:46:43 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/12 13:05:22 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				get_board_size(t_player *p)
 			p->x_plat = ((p->plateau)[2] != NULL) ?
 				ft_atoi((p->plateau)[2]) : 0;
 		}
-		free_str_tab(&(p->plateau), size/* + 1*/);
+		free_str_tab(&(p->plateau), size);
 		if (p->y_plat == 0 || p->x_plat == 0)
 		{
 			ft_putstr("Bad board info\n");
@@ -89,10 +89,10 @@ int				get_board(t_player *p)
 	i = -1;
 	y = 0;
 	if ((p->plateau = (char**)malloc(sizeof(char*) \
-									 * (p->y_plat + 1))) == NULL)
+								* (p->y_plat + 1))) == NULL)
 		return (-1);
 	while (y < (p->y_plat + 1) \
-		   && get_next_line(0, &(p->line)) != -1)
+			&& get_next_line(0, &(p->line)) != -1)
 	{
 		if (((p->plateau)[y] = (char*)malloc(sizeof(char) \
 									* (ft_strlen(p->line) + 1))) == NULL)
@@ -101,21 +101,11 @@ int				get_board(t_player *p)
 		free_str(&(p->line));
 		y++;
 	}
-	if (p->value == NULL)
-		init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1), \
-					 (p->y_plat + 1));
-	else
-		cpy_plateau(p->value, (const char**)p->plateau, \
-					(p->y_plat + 1));
+	new_or_copy_tab(p);
 	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', '9');
-//	update_tab_value(&(p->value), p->y_plat, (p->order == 2) ? 'X' : 'O', '9');
 	while (++i < 8)
 		update_tab_value(&(p->value), p->y_plat, '9' - i, '8' - i);
-	/* i = -1; */
-	/* while (++i < 8) */
-	/* 	update_tab_value(&(p->value), p->y_plat, '1' + i, '2' + i); */
 	fill_value(&(p->value), p->y_plat + 1);
-//	print_tab_for_test(p->value, p->y_plat + 1);
 	free_str(&(p->line));
 	return (0);
 }
