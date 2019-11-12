@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 08:57:21 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/12 13:05:22 by naali            ###   ########.fr       */
+/*   Updated: 2019/11/12 14:00:17 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ int				init_cp_plat(t_player *p, int x, int y)
 
 int				get_board(t_player *p)
 {
-	int		i;
 	int		y;
 
-	i = -1;
 	y = 0;
 	if ((p->plateau = (char**)malloc(sizeof(char*) \
 								* (p->y_plat + 1))) == NULL)
@@ -101,11 +99,8 @@ int				get_board(t_player *p)
 		free_str(&(p->line));
 		y++;
 	}
-	new_or_copy_tab(p);
-	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', '9');
-	while (++i < 8)
-		update_tab_value(&(p->value), p->y_plat, '9' - i, '8' - i);
-	fill_value(&(p->value), p->y_plat + 1);
+	if (new_or_copy_tab(p) == -1)
+		return (-1);
 	free_str(&(p->line));
 	return (0);
 }

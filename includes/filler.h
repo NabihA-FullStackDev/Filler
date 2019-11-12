@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 22:43:36 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/12 13:04:17 by naali            ###   ########.fr       */
+/*   Updated: 2019/11/12 13:35:22 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int					solve_xminus_yplus(t_solve *s, t_player *p, int x, int y);
 int					solve_xminus_yminus(t_solve *s, t_player *p, int x, int y);
 
 int					init_cp_plat(t_player *p, int x, int y);
-void				new_or_copy_tab(t_player *p);
+int					new_or_copy_tab(t_player *p);
 char				**cpy_plateau(char **dst, const char **src,
 									unsigned int max);
 void				update_tab_value(char ***val, int max, char start,
