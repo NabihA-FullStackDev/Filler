@@ -6,14 +6,12 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 18:53:57 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/25 18:53:40 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/13 16:33:45 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		GET_NEXT_LINE_H
-# define	GET_NEXT_LINE_H
-
-# include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <sys/types.h>
 # include <sys/uio.h>

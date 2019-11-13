@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 18:53:57 by nabih             #+#    #+#             */
-/*   Updated: 2019/07/26 04:41:06 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/13 16:51:22 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static unsigned int		check_str(char *str)
 
 static char				*choose_copy(char *tmp)
 {
-	if (ft_strchr(tmp, '\n'))
+	if (tmp != NULL && ft_strchr(tmp, '\n'))
 	{
 		ft_strcpy(tmp, ft_strchr(tmp, '\n') + 1);
 		return (tmp);
 	}
-	if (check_str(tmp) > 0)
+	if (tmp != NULL && check_str(tmp) > 0)
 	{
 		tmp = ft_strcpy(tmp, ft_strchr(tmp, '\0'));
 		return (tmp);
@@ -56,14 +56,14 @@ int						get_next_line(int const fd, char **line)
 	{
 		*line = NULL;
 		while ((tmp1 == NULL || tmp1[(check = check_str(tmp1))] != '\n')
-			   && (rd = read(fd, buf, BUFF_SIZE)) > 0)
+					&& (rd = read(fd, buf, BUFF_SIZE)) > 0)
 		{
 			buf[rd] = '\0';
 			tmp2 = tmp1;
 			tmp1 = ft_strjoin(tmp1, buf);
 			ft_memdel((void**)(&tmp2));
 		}
-		*line = ft_strsub(tmp1, 0, check);
+		(*line != NULL) ? *line = ft_strsub(tmp1, 0, check) : 0;
 		return ((choose_copy(tmp1) == NULL) ? 0 : 1);
 	}
 	return (-1);

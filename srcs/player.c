@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 07:52:02 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 04:11:52 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/13 16:53:08 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void			init_player_vars(t_player *p)
 
 int				get_order_num(t_player *p)
 {
-	if (get_next_line(0, &(p->line)) == -1)
+	if (get_next_line(0, &(p->line)) == -1 || p->line == NULL)
 	{
 		ft_putstr("Bad player info\n");
 		free_str(&(p->line));

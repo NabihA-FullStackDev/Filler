@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 01:19:37 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/10 03:57:58 by nabih            ###   ########.fr       */
+/*   Updated: 2019/11/13 16:14:33 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				check_contact(t_player *p, t_piece *pi, int x, int y)
 			res.contact += 1;
 		if ((p->plateau)[y + tmp[i].y][x + tmp[i].x] == res.op)
 			return (0);
-		res.new_pts += (int)(p->value[y + tmp[i].y][x + tmp[i].x] - '0');
+		res.new_pts += (int)(p->value[y + tmp[i].y][x + tmp[i].x] - ' ');
 		i++;
 	}
 	return (return_value_check(p, &res));

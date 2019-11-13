@@ -6,7 +6,7 @@
 /*   By: nabih <naali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 14:21:45 by nabih             #+#    #+#             */
-/*   Updated: 2019/11/12 13:48:27 by naali            ###   ########.fr       */
+/*   Updated: 2019/11/13 16:14:47 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			fill_value(char ***val, int max)
 		while ((*val)[y][x] != '\0')
 		{
 			if ((*val)[y][x] == '.')
-				(*val)[y][x] = '0';
+				(*val)[y][x] = ' ';
 			x++;
 		}
 		y++;
@@ -85,16 +85,16 @@ int				new_or_copy_tab(t_player *p)
 	i = -1;
 	if (p->value == NULL)
 	{
-		if (init_cp_plat(p, (ft_strlen(p->plateau[0]) + 1),	\
-						  (p->y_plat + 1)) == -1)
+		if (init_cp_plat(p, ft_strlen(p->plateau[0]) + 1, \
+							(p->y_plat + 1)) == -1)
 			return (-1);
 	}
 	else
 		cpy_plateau(p->value, (const char**)p->plateau, \
 					(p->y_plat + 1));
-	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', '9');
-	while (++i < 8)
-		update_tab_value(&(p->value), p->y_plat, '9' - i, '8' - i);
+	update_tab_value(&(p->value), p->y_plat, (p->order == 1) ? 'X' : 'O', 'N');
+	while (++i < 45)
+		update_tab_value(&(p->value), p->y_plat, 'N' - i, 'M' - i);
 	fill_value(&(p->value), p->y_plat + 1);
 	return (0);
 }
